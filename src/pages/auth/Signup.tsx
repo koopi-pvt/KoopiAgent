@@ -222,6 +222,7 @@ export default function Signup() {
             </p>
           </div>
         </div>
+        </div>
       </div>
     </div>
   );
