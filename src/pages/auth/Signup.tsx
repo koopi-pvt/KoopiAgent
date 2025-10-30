@@ -83,7 +83,7 @@ export default function Signup() {
       });
 
       if (error) throw error;
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
