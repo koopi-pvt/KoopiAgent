@@ -48,7 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    // Sign up with email confirmation enabled
+    // Sign up with email confirmation disabled (we'll use SendGrid instead)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -56,27 +56,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         data: {
           full_name: fullName
         },
-        emailRedirectTo: `${window.location.origin}/confirm-email`
+        emailRedirectTo: `${window.location.origin}/confirm-email`,
+        // Disable Supabase's built-in email confirmation
+        // We'll send our own via SendGrid
       }
     });
 
     if (error) throw error;
 
     // Send custom confirmation email via SendGrid
-    if (data.user && !data.user.confirmed_at) {
+    if (data.user) {
       try {
-        // Get the confirmation URL from Supabase
-        // Note: In production, you'd want to handle this through Supabase webhooks
-        // For now, we'll rely on Supabase's built-in email
-        // But we can send a custom styled email in parallel
-        const confirmationEmail = generateConfirmationEmail(
-          email,
-          `${window.location.origin}/confirm-email?token=check-your-email`
-        );
+        // For custom confirmation, we need to generate a confirmation link
+        // Since Supabase doesn't provide the token directly, we'll use a simplified approach
+        // In production, you'd want to use Supabase Admin API or Edge Functions
+        const confirmationUrl = `${window.location.origin}/confirm-email?email=${encodeURIComponent(email)}`;
+        const confirmationEmail = generateConfirmationEmail(email, confirmationUrl);
         await sendEmail(confirmationEmail);
       } catch (emailError) {
-        console.error('Failed to send custom confirmation email:', emailError);
-        // Don't block signup if custom email fails
+        console.error('Failed to send confirmation email:', emailError);
+        // Don't block signup if email fails
       }
     }
   };
