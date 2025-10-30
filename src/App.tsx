@@ -4,6 +4,7 @@ import Navigation from './components/common/Navigation';
 import Home from './pages/landing/Home';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
+import ConfirmEmail from './pages/auth/ConfirmEmail';
 import Dashboard from './pages/Dashboard';
 import Loader from './components/common/Loader';
 
