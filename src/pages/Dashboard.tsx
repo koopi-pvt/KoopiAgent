@@ -1,51 +1,24 @@
 import { useState } from 'react';
 import DashboardNav from '../components/dashboard/DashboardNav';
-import PromptBox from '../components/dashboard/PromptBox';
-import ChatHistory from '../components/dashboard/ChatHistory';
-import { mockUser, mockChats } from '../mock/dashboardMock';
+import ProjectPrompt from '../components/dashboard/ProjectPrompt';
+import ProjectHistory from '../components/dashboard/ProjectHistory';
+import CommunityProjects from '../components/dashboard/CommunityProjects';
+import { mockUser, mockProjects, mockCommunityProjects } from '../mock/dashboardMock';
 
 export default function Dashboard() {
-  const [chats, setChats] = useState(mockChats);
-  const [currentChat, setCurrentChat] = useState<string | null>(null);
+  const [projects, setProjects] = useState(mockProjects);
 
-  const handleSendMessage = (message: string) => {
-    console.log('Sending message:', message);
-    // For now, just add to chat history with mock response
-    const newMessage = {
+  const handleCreateProject = (prompt: string) => {
+    console.log('Creating project:', prompt);
+    const newProject = {
       id: Date.now().toString(),
-      role: 'user' as const,
-      content: message,
-      timestamp: new Date()
+      title: prompt.slice(0, 50),
+      description: prompt,
+      createdAt: new Date(),
+      status: 'pending' as const
     };
-    
-    const aiResponse = {
-      id: (Date.now() + 1).toString(),
-      role: 'assistant' as const,
-      content: 'This is a mock AI response. Backend integration will enable real AI interactions.',
-      timestamp: new Date()
-    };
-
-    if (currentChat) {
-      setChats(prev => prev.map(chat => 
-        chat.id === currentChat 
-          ? { ...chat, messages: [...chat.messages, newMessage, aiResponse] }
-          : chat
-      ));
-    } else {
-      const newChat = {
-        id: Date.now().toString(),
-        title: message.slice(0, 50),
-        messages: [newMessage, aiResponse],
-        createdAt: new Date()
-      };
-      setChats(prev => [newChat, ...prev]);
-      setCurrentChat(newChat.id);
-    }
+    setProjects(prev => [newProject, ...prev]);
   };
-
-  const currentMessages = currentChat 
-    ? chats.find(chat => chat.id === currentChat)?.messages || []
-    : [];
 
   return (
     <div className="min-h-screen bg-black">
@@ -63,22 +36,17 @@ export default function Dashboard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
           <div className="lg:col-span-2">
-            <PromptBox 
-              onSend={handleSendMessage}
-              messages={currentMessages}
-            />
+            <ProjectPrompt onSubmit={handleCreateProject} />
           </div>
           
           <div className="lg:col-span-1">
-            <ChatHistory 
-              chats={chats}
-              currentChat={currentChat}
-              onSelectChat={setCurrentChat}
-            />
+            <ProjectHistory projects={projects} />
           </div>
         </div>
+
+        <CommunityProjects projects={mockCommunityProjects} />
       </div>
     </div>
   );
