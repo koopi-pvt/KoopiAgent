@@ -114,7 +114,10 @@ export default function DashboardNav({ user }: DashboardNavProps) {
                       <span className="font-semibold">{user.credits}</span>
                     </div>
 
-                    <button className="w-full flex items-center space-x-3 px-4 py-3 text-white/80 hover:bg-white/5 rounded-xl transition-colors duration-200">
+                    <button 
+                      onClick={handleLogout}
+                      className="w-full flex items-center space-x-3 px-4 py-3 text-white/80 hover:bg-white/5 rounded-xl transition-colors duration-200"
+                    >
                       <LogOut className="w-5 h-5 text-white/60" />
                       <span>Logout</span>
                     </button>
