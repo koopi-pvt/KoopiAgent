@@ -40,6 +40,7 @@ function AppRoutes() {
         } />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/confirm-email" element={<ConfirmEmail />} />
         <Route 
           path="/dashboard" 
           element={
