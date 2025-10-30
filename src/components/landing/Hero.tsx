@@ -86,10 +86,10 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up-delay-2">
-          <button className="group px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2 shadow-2xl shadow-white/20">
+          <Link to="/signup" className="group px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2 shadow-2xl shadow-white/20">
             <span>Start Building Free</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
+          </Link>
           <button className="px-8 py-4 bg-white/5 text-white rounded-full font-semibold text-lg hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all duration-300">
             Watch Demo
           </button>
