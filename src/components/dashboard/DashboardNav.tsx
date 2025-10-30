@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { User, CreditCard, Crown, LogOut, ChevronDown } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface DashboardNavProps {
   user: {
