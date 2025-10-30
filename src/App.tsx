@@ -3,6 +3,7 @@ import Navigation from './components/common/Navigation';
 import Home from './pages/landing/Home';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   // debug: helps verify the root App component is mounting in the browser
