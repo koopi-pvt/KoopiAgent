@@ -4,7 +4,6 @@ import Navigation from './components/common/Navigation';
 import Home from './pages/landing/Home';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
-import Dashboard from './pages/dashboard/Dashboard';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -20,7 +19,6 @@ function AnimatedRoutes() {
         } />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </AnimatePresence>
   );
