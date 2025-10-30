@@ -92,7 +92,8 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
+    <PageTransition>
+      <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-radial from-white/5 via-transparent to-transparent" />
 
       <div className="w-full max-w-6xl mx-auto px-6 py-12 relative z-10 flex items-center gap-12">
