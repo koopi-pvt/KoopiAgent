@@ -1,11 +1,14 @@
 import Hero from '../../components/landing/Hero';
 import Footer from '../../components/common/Footer';
+import PageTransition from '../../components/common/PageTransition';
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <Footer />
-    </>
+    <PageTransition>
+      <>
+        <Hero />
+        <Footer />
+      </>
+    </PageTransition>
   );
 }
